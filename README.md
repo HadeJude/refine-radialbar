@@ -62,10 +62,11 @@ Before:
 ```
 After:
 ```lua
-    function QBCore.Functions.Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, onFinish, onCancel)
+    function QBCore.Functions.Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, space, onFinish, onCancel)
         local name = name
         print(name)
-        exports['refine-radialbar']:Custom({
+        --added back the onFinish, and onCancel for fail safe
+        exports['rprogress']:Custom({
             canCancel = canCancel,       -- Allow cancelling
             deadCancel = useWhileDead,   --Cant Be Cancel Even you Die
             Duration = duration,        -- Duration of the progress
@@ -73,15 +74,16 @@ After:
             Animation = animation,
             PropAttach = prop,
             DisableControls = disableControls,
-            onStart = function()
-                --print('Start')
-            end,
             onComplete = function(cancelled)
-                if cancelled then
-                    onCancel()
+                if not cancelled then
+                    if onFinish then
+                        onFinish()
+                    end
                 else
-                    onFinish()
-                end   
+                    if onCancel then
+                        onCancel()
+                    end
+                end 
             end
         })
     end
