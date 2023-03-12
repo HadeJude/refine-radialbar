@@ -66,7 +66,7 @@ After:
         local name = name
         print(name)
         --add the "space" call since qb-core default function hast propTwo and I forgot that prop is already just one <3
-        exports['rprogress']:Custom({
+        exports['refine-radialbar']:Custom({
             canCancel = canCancel,       -- Allow cancelling
             deadCancel = useWhileDead,   --Cant Be Cancel Even you Die
             Duration = duration,        -- Duration of the progress
