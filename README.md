@@ -1,5 +1,5 @@
 # refine-radialbar
- A customizable radial progressbar. A Revamp version of rprogress and progressbar. <3
+ A standalone customizable radial progressbar. A Revamp version of rprogress and progressbar. <3
 
 
 ## Need Assistance?
