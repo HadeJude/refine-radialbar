@@ -37,6 +37,7 @@ Config.DisableControls = {
 InventoryBusy = function(bool)
     LocalPlayer.state.invBusy  = bool -- for Ox-Inventory
     --TriggerServerEvent("OpenInventory", bool) -- for QB-Inventory 
+    --LocalPlayer.state:set("inv_busy", bool, true) -- Busy -- for QB-Inventory Choose whanever what's working on your side I'm using Ox-Inv rn so XD
 end
 
 Config.onStart      = function()end
