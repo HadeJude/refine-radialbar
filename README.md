@@ -65,7 +65,7 @@ After:
     function QBCore.Functions.Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, space, onFinish, onCancel)
         local name = name
         print(name)
-        --added back the onFinish, and onCancel for fail safe
+        --add the "space" call since qb-core default function hast propTwo and I forgot that prop is already just one <3
         exports['rprogress']:Custom({
             canCancel = canCancel,       -- Allow cancelling
             deadCancel = useWhileDead,   --Cant Be Cancel Even you Die
