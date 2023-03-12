@@ -1,5 +1,7 @@
 Config = {}
 
+Config.QBCore = true --make it "false" if standalone 
+
 Config.From             = 0     -- Starting progress percentage
 Config.To               = 100   -- Ending progress percentage
 

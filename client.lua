@@ -1,4 +1,7 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+
+if Config.QBCore then
+    QBCore = exports['qb-core']:GetCoreObject() 
+end
 local OnStart, OnComplete, OnTimeout, Animation, PropAttach = nil, nil, nil, nil, nil
 local prop_net, propTwo_net = false, nil, nil
 local Run = false
@@ -80,94 +83,168 @@ end
 
 function Custom(options)
 
-    local PlayerData = QBCore.Functions.GetPlayerData()
-    local Controls = {
-        disableMovement = Config.DisableControls.disableMovement,
-        disableCarMovement = Config.DisableControls.disableCarMovement,
-        disableMouse = Config.DisableControls.disableMouse,
-        disableCombat = Config.DisableControls.disableCombat,
-    }
-
-    if options.DisableControls ~= nil then
-        Controls = options.DisableControls
-    end
-    InventoryBusy(true)
-
-    options = MergeConfig(Config, options)
-
-    options.DisableControls = MergeConfig(Config.DisableControls, Controls)
-
-    options.display = true
+    if Config.QBCore then
+        local PlayerData = QBCore.Functions.GetPlayerData()
+        local Controls = {
+            disableMovement = Config.DisableControls.disableMovement,
+            disableCarMovement = Config.DisableControls.disableCarMovement,
+            disableMouse = Config.DisableControls.disableMouse,
+            disableCombat = Config.DisableControls.disableCombat,
+        }
     
-    OnStart = options.onStart
-    OnComplete = options.onComplete
-    OnTimeout = options.onTimeout
-
-    Animation = nil
-    if options.Animation ~= nil then
-        Animation = options.Animation
-    end
-
-    PropAttach = nil
-    if options.PropAttach ~= nil then
-        PropAttach = options.PropAttach
-    end
-
-    -- CAN'T SEND FUNCTIONS TO NUI
-    options.onStart = nil
-    options.onComplete = nil
-    options.onTimeout = nil
-
-    SendNUIMessage(options) 
-
-    Run = true
-    PlayAnimation(options)
-    AttachPropAttach(options)
-
-    local cancelKey = Config.CancelKey
-
-    if options.cancelKey and tonumber(options.cancelKey) then
-        cancelKey = options.cancelKey
-    end
-
-    if options.Async == false then
-        while Run do
-
-            local ped = PlayerPedId()
-            if options.canCancel then
-                if IsControlJustPressed(0, cancelKey) or IsPedJumping(ped) or IsPedRagdoll(ped) or IsPedClimbing(ped) then
-                    InventoryBusy(false)
-                    OnComplete(true)
-                    TriggerEvent("RadialBar:stop")
-                    TriggerEvent("RadialBar:stopred")
-                end
-
-                if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] or IsPauseMenuActive() then
-                    InventoryBusy(false)
-                    OnComplete(true)
-                    TriggerEvent("RadialBar:stop")
-                    TriggerEvent("RadialBar:stopred")
-                end
-            end
-
-            if options.deadCancel then
-                if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] then
-                    InventoryBusy(false)
-                    OnComplete(true)
-                    TriggerEvent("RadialBar:stop")
-                    TriggerEvent("RadialBar:stopred")
-                    print("dead cancel")
-                end
-            end
-
-            DisableControls(options)
-            Wait(1)
+        if options.DisableControls ~= nil then
+            Controls = options.DisableControls
         end
-
-        StopAnimation()
-    else
-        CreateThread(function()
+        InventoryBusy(true)
+    
+        options = MergeConfig(Config, options)
+    
+        options.DisableControls = MergeConfig(Config.DisableControls, Controls)
+    
+        options.display = true
+        
+        OnStart = options.onStart
+        OnComplete = options.onComplete
+        OnTimeout = options.onTimeout
+    
+        Animation = nil
+        if options.Animation ~= nil then
+            Animation = options.Animation
+        end
+    
+        PropAttach = nil
+        if options.PropAttach ~= nil then
+            PropAttach = options.PropAttach
+        end
+    
+        -- CAN'T SEND FUNCTIONS TO NUI
+        options.onStart = nil
+        options.onComplete = nil
+        options.onTimeout = nil
+    
+        SendNUIMessage(options) 
+    
+        Run = true
+        PlayAnimation(options)
+        AttachPropAttach(options)
+    
+        local cancelKey = Config.CancelKey
+    
+        if options.cancelKey and tonumber(options.cancelKey) then
+            cancelKey = options.cancelKey
+        end
+    
+        if options.Async == false then
             while Run do
+    
+                local ped = PlayerPedId()
+                if options.canCancel then
+                    if IsControlJustPressed(0, cancelKey) or IsPedJumping(ped) or IsPedRagdoll(ped) or IsPedClimbing(ped) or IsPauseMenuActive() then
+                        InventoryBusy(false)
+                        OnComplete(true)
+                        TriggerEvent("RadialBar:stop")
+                        TriggerEvent("RadialBar:stopred")
+                    end
+                end
+    
+                if options.deadCancel then
+                    if IsEntityDead(ped) then
+                        InventoryBusy(false)
+                        OnComplete(true)
+                        TriggerEvent("RadialBar:stop")
+                        TriggerEvent("RadialBar:stopred")
+                        print("dead cancel")
+                    end
+                end
+    
+                DisableControls(options)
+                Wait(1)
+            end
+    
+            StopAnimation()
+        else
+            CreateThread(function()
+                while Run do
+                    local ped = PlayerPedId()
+                    local ped = PlayerPedId()
+                    if options.canCancel then
+                        if IsControlJustPressed(0, cancelKey) or IsPedJumping(ped) or IsPedRagdoll(ped) or IsPedClimbing(ped) or IsPauseMenuActive() then
+                            InventoryBusy(false)
+                            OnComplete(true)
+                            TriggerEvent("RadialBar:stop")
+                            TriggerEvent("RadialBar:stopred")
+                        end
+                    end
+        
+                    if options.deadCancel then
+                        if IsEntityDead(ped) then
+                            InventoryBusy(false)
+                            OnComplete(true)
+                            TriggerEvent("RadialBar:stop")
+                            TriggerEvent("RadialBar:stopred")
+                            print("dead cancel")
+                        end
+                    end
+    
+                    DisableControls(options)
+                    Wait(0)
+                end
+            end)
+        end
+    else
+        local PlayerData = QBCore.Functions.GetPlayerData()
+        local Controls = {
+            disableMovement = Config.DisableControls.disableMovement,
+            disableCarMovement = Config.DisableControls.disableCarMovement,
+            disableMouse = Config.DisableControls.disableMouse,
+            disableCombat = Config.DisableControls.disableCombat,
+        }
+    
+        if options.DisableControls ~= nil then
+            Controls = options.DisableControls
+        end
+        InventoryBusy(true)
+    
+        options = MergeConfig(Config, options)
+    
+        options.DisableControls = MergeConfig(Config.DisableControls, Controls)
+    
+        options.display = true
+        
+        OnStart = options.onStart
+        OnComplete = options.onComplete
+        OnTimeout = options.onTimeout
+    
+        Animation = nil
+        if options.Animation ~= nil then
+            Animation = options.Animation
+        end
+    
+        PropAttach = nil
+        if options.PropAttach ~= nil then
+            PropAttach = options.PropAttach
+        end
+    
+        -- CAN'T SEND FUNCTIONS TO NUI
+        options.onStart = nil
+        options.onComplete = nil
+        options.onTimeout = nil
+    
+        SendNUIMessage(options) 
+    
+        Run = true
+        PlayAnimation(options)
+        AttachPropAttach(options)
+    
+        local cancelKey = Config.CancelKey
+    
+        if options.cancelKey and tonumber(options.cancelKey) then
+            cancelKey = options.cancelKey
+        end
+    
+        if options.Async == false then
+            while Run do
+    
                 local ped = PlayerPedId()
                 if options.canCancel then
                     if IsControlJustPressed(0, cancelKey) or IsPedJumping(ped) or IsPedRagdoll(ped) or IsPedClimbing(ped) then
@@ -176,7 +253,7 @@ function Custom(options)
                         TriggerEvent("RadialBar:stop")
                         TriggerEvent("RadialBar:stopred")
                     end
-
+    
                     if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] or IsPauseMenuActive() then
                         InventoryBusy(false)
                         OnComplete(true)
@@ -184,7 +261,7 @@ function Custom(options)
                         TriggerEvent("RadialBar:stopred")
                     end
                 end
-
+    
                 if options.deadCancel then
                     if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] then
                         InventoryBusy(false)
@@ -194,12 +271,48 @@ function Custom(options)
                         print("dead cancel")
                     end
                 end
-
+    
                 DisableControls(options)
-                Wait(0)
+                Wait(1)
             end
-        end)
-    end   
+    
+            StopAnimation()
+        else
+            CreateThread(function()
+                while Run do
+                    local ped = PlayerPedId()
+                    if options.canCancel then
+                        if IsControlJustPressed(0, cancelKey) or IsPedJumping(ped) or IsPedRagdoll(ped) or IsPedClimbing(ped) then
+                            InventoryBusy(false)
+                            OnComplete(true)
+                            TriggerEvent("RadialBar:stop")
+                            TriggerEvent("RadialBar:stopred")
+                        end
+    
+                        if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] or IsPauseMenuActive() then
+                            InventoryBusy(false)
+                            OnComplete(true)
+                            TriggerEvent("RadialBar:stop")
+                            TriggerEvent("RadialBar:stopred")
+                        end
+                    end
+    
+                    if options.deadCancel then
+                        if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] then
+                            InventoryBusy(false)
+                            OnComplete(true)
+                            TriggerEvent("RadialBar:stop")
+                            TriggerEvent("RadialBar:stopred")
+                            print("dead cancel")
+                        end
+                    end
+    
+                    DisableControls(options)
+                    Wait(0)
+                end
+            end)
+        end 
+    end  
 end
 
 function Linear(text, duration)
