@@ -25,7 +25,7 @@ Config.Width        = 300       -- Width of the linear bar
 Config.Height       = 40        -- Height of the linear bar
 Config.Cap          = 'butt'    -- or 'round'
 Config.Padding      = 0         -- Backgound bar padding
-Config.CancelKey    = 178       -- X Button
+Config.CancelKey    = 73       -- X Button
 
 Config.Easing       = "easeLinear" 
 

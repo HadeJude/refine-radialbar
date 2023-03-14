@@ -1,4 +1,3 @@
-
 if Config.QBCore then
     QBCore = exports['qb-core']:GetCoreObject() 
 end
@@ -82,7 +81,6 @@ function Start(text, duration, linear)
 end
 
 function Custom(options)
-
     if Config.QBCore then
         local PlayerData = QBCore.Functions.GetPlayerData()
         local Controls = {
