@@ -440,20 +440,20 @@ function PlayAnimation()
         local player = PlayerPedId()
         if DoesEntityExist(player) and not IsEntityDead(player) then  
             Citizen.CreateThread(function()
-                if Animation.scenario ~= nil then
-                    TaskStartScenarioInPlace(player, Animation.scenario, 0, true)
+                if Animation.task ~= nil then
+                    TaskStartScenarioInPlace(player, Animation.task, 0, true)
                 else
-                    if Animation.animationDictionary ~= nil and Animation.animationName ~= nil then
+                    if Animation.animDict ~= nil and Animation.anim ~= nil then
                         
                         if Animation.flag == nil then
                             Animation.flag = 1
                         end
 
-                        RequestAnimDict( Animation.animationDictionary )
-                        while not HasAnimDictLoaded( Animation.animationDictionary ) do
+                        RequestAnimDict( Animation.animDict )
+                        while not HasAnimDictLoaded( Animation.animDict ) do
                             Wait(1)
                         end
-                        TaskPlayAnim( player, Animation.animationDictionary, Animation.animationName, 3.0, 1.0, -1, Animation.flag, 0, 0, 0, 0 )
+                        TaskPlayAnim( player, Animation.animDict, Animation.anim, 3.0, 1.0, -1, Animation.flag, 0, 0, 0, 0 )
                     end
                 end
             end)
@@ -465,11 +465,11 @@ function StopAnimation()
     if Animation ~= nil then
         local player = PlayerPedId()
         if DoesEntityExist( player ) and not IsEntityDead( player ) then
-            if Animation.scenario ~= nil then
+            if Animation.task ~= nil then
                 ClearPedTasks(player)
             else
-                if Animation.animationDictionary ~= nil and Animation.animationName ~= nil then
-                    StopAnimTask(player, Animation.animationDictionary, Animation.animationName, 1.0)
+                if Animation.animDict ~= nil and Animation.anim ~= nil then
+                    StopAnimTask(player, Animation.animDict, Animation.anim, 1.0)
                 end
             end
         end

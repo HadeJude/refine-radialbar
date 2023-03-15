@@ -127,8 +127,8 @@ New QB-Core `RADIALBAR` Function:
         disableMouse = false,
         disableCombat = true,
     }, {
-        animationDictionary = 'missheistdockssetup1clipboard@base',
-        animationName = 'base',
+        animDict = 'missheistdockssetup1clipboard@base',
+        anim = 'base',
         flags = 1,
     }, {
         model = 'prop_notepad_01',
@@ -158,9 +158,9 @@ New QB-Core `RADIALBAR` Function:
         Color = "rgba(224, 53, 40, 1.0)",
         Label = "This is Red Radial",
         Animation = {
-            --scenario = "WORLD_HUMAN_AA_SMOKE", 
-            animationDictionary = "missarmenian2", 
-            animationName = "drunk_loop",
+            --task = "WORLD_HUMAN_AA_SMOKE", 
+            animDict = "missarmenian2", 
+            anim = "drunk_loop",
             flag = 1,
         },
         DisableControls = {
