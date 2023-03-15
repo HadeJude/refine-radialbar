@@ -128,7 +128,7 @@ New QB-Core `RADIALBAR` Function:
         disableCombat = true,
     }, {
         animDict = 'missheistdockssetup1clipboard@base',
-        anim = 'base',
+        animationName = 'base',
         flags = 1,
     }, {
         model = 'prop_notepad_01',
@@ -161,7 +161,7 @@ New QB-Core `RADIALBAR` Function:
             --task = "WORLD_HUMAN_AA_SMOKE", 
             animDict = "missarmenian2", 
             anim = "drunk_loop",
-            flag = 1,
+            flags = 1,
         },
         DisableControls = {
             disableMovement = true,

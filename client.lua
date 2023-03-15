@@ -445,15 +445,15 @@ function PlayAnimation()
                 else
                     if Animation.animDict ~= nil and Animation.anim ~= nil then
                         
-                        if Animation.flag == nil then
-                            Animation.flag = 1
+                        if Animation.flags == nil then
+                            Animation.flags = 1
                         end
 
                         RequestAnimDict( Animation.animDict )
                         while not HasAnimDictLoaded( Animation.animDict ) do
                             Wait(1)
                         end
-                        TaskPlayAnim( player, Animation.animDict, Animation.anim, 3.0, 1.0, -1, Animation.flag, 0, 0, 0, 0 )
+                        TaskPlayAnim( player, Animation.animDict, Animation.anim, 3.0, 1.0, -1, Animation.flags, 0, 0, 0, 0 )
                     end
                 end
             end)
