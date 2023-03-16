@@ -158,7 +158,7 @@ function Custom(options)
                         OnComplete(true)
                         TriggerEvent("RadialBar:stop")
                         TriggerEvent("RadialBar:stopred")
-                        print("dead cancel")
+                        -- print("dead cancel")
                     end
                 end
     
@@ -193,7 +193,7 @@ function Custom(options)
                             OnComplete(true)
                             TriggerEvent("RadialBar:stop")
                             TriggerEvent("RadialBar:stopred")
-                            print("dead cancel")
+                            -- print("dead cancel")
                         end
                     end
     
@@ -270,7 +270,7 @@ function Custom(options)
                         OnComplete(true)
                         TriggerEvent("RadialBar:stop")
                         TriggerEvent("RadialBar:stopred")
-                        print("dead cancel")
+                        -- print("dead cancel")
                     end
                 end
     
@@ -299,7 +299,7 @@ function Custom(options)
                             OnComplete(true)
                             TriggerEvent("RadialBar:stop")
                             TriggerEvent("RadialBar:stopred")
-                            print("dead cancel")
+                            -- print("dead cancel")
                         end
                     end
     
@@ -336,7 +336,6 @@ function DisableControls(options)
         DisableControlAction(0, 36, true) -- INPUT_DUCK
         DisableControlAction(0, 21, true) -- disable sprint
         DisableControlAction(0, 75, true)  -- Disable exit vehicle
-        DisableControlAction(27, 75, true) -- Disable exit vehicle 
     end
 
     if options.disableCarMovement then
@@ -379,7 +378,7 @@ function AttachPropAttach()
 
                         local pCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0)
                         local modelSpawn = CreateObject(GetHashKey(PropAttach.model), pCoords.x, pCoords.y, pCoords.z, true, true, true)
-                        print(modelSpawn)
+                        -- print(modelSpawn)
                         local netid = ObjToNet(modelSpawn)
                         SetNetworkIdExistsOnAllMachines(netid, true)
                         NetworkSetNetworkIdDynamic(netid, true)
@@ -408,7 +407,7 @@ function AttachPropAttach()
     
                             local pCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0)
                             local modelSpawnTwo = CreateObject(GetHashKey(PropAttach.modeltwo), pCoords.x, pCoords.y, pCoords.z, true, true, true)
-                            print(modelSpawnTwo)
+                            -- print(modelSpawnTwo)
                             local netidtwo = ObjToNet(modelSpawnTwo)
                             SetNetworkIdExistsOnAllMachines(netidtwo, true)
                             NetworkSetNetworkIdDynamic(netidtwo, true)
@@ -449,11 +448,11 @@ function PlayAnimation()
                             Animation.flags = 1
                         end
 
-                        RequestAnimDict( Animation.animDict )
-                        while not HasAnimDictLoaded( Animation.animDict ) do
+                        RequestAnimDict(Animation.animDict)
+                        while not HasAnimDictLoaded(Animation.animDict) do
                             Wait(1)
                         end
-                        TaskPlayAnim( player, Animation.animDict, Animation.anim, 3.0, 1.0, -1, Animation.flags, 0, 0, 0, 0 )
+                        TaskPlayAnim(player, Animation.animDict, Animation.anim, 3.0, 1.0, -1, Animation.flags, 0, 0, 0, 0)
                     end
                 end
             end)
@@ -464,7 +463,7 @@ end
 function StopAnimation()
     if Animation ~= nil then
         local player = PlayerPedId()
-        if DoesEntityExist( player ) and not IsEntityDead( player ) then
+        if DoesEntityExist(player) and not IsEntityDead(player) then
             if Animation.task ~= nil then
                 ClearPedTasks(player)
             else
