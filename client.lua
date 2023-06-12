@@ -153,7 +153,7 @@ function Custom(options)
                 end
     
                 if options.deadCancel then
-                    if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] then
+                    if IsEntityDead(PlayerPedId()) then
                         InventoryBusy(false)
                         OnComplete(true)
                         TriggerEvent("RadialBar:stop")
@@ -188,7 +188,7 @@ function Custom(options)
                     end
     
                     if options.deadCancel then
-                        if PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] then
+                        if IsEntityDead(PlayerPedId()) then
                             InventoryBusy(false)
                             OnComplete(true)
                             TriggerEvent("RadialBar:stop")
