@@ -323,13 +323,13 @@ end
 
 function DisableControls(options)
 
-    if options.disableMouse then
+    if options.DisableControls.disableMouse then
         DisableControlAction(0, 1, true) -- LookLeftRight
         DisableControlAction(0, 2, true) -- LookUpDown
         DisableControlAction(0, 106, true) -- VehicleMouseControlOverride
     end
 
-    if options.disableMovement then
+    if options.DisableControls.disableMovement then
         DisableControlAction(0, 30, true) -- disable left/right
         DisableControlAction(0, 36, true) -- Left CTRL
         DisableControlAction(0, 31, true) -- disable forward/back
@@ -338,7 +338,7 @@ function DisableControls(options)
         DisableControlAction(0, 75, true)  -- Disable exit vehicle
     end
 
-    if options.disableCarMovement then
+    if options.DisableControls.disableCarMovement then
         DisableControlAction(0, 63, true) -- veh turn left
         DisableControlAction(0, 64, true) -- veh turn right
         DisableControlAction(0, 71, true) -- veh forward
@@ -346,7 +346,7 @@ function DisableControls(options)
         DisableControlAction(0, 75, true) -- disable exit vehicle
     end
 
-    if options.disableCombat then
+    if options.DisableControls.disableCombat then
         DisablePlayerFiring(PlayerId(), true) -- Disable weapon firing
         DisableControlAction(0, 24, true) -- disable attack
         DisableControlAction(0, 25, true) -- disable aim
