@@ -2,8 +2,12 @@
  A standalone customizable radial progressbar. A Revamp version of rprogress and progressbar. <3
 
 
+## Need Unique Script Experience?
+- [Tebex](https://refined.tebex.io/)
+
 ## Need Assistance?
 - [Discord](https://discord.com/invite/GrGGkQtv5P)
+
 
 ### Features
  * Customizable Color, Position & Styles
